@@ -1,25 +1,13 @@
-name: Sync to Hugging Face and Check File Size
-
+name: Sync to Hugging Face hub
 on:
   push:
     branches: [main]
-  pull_request:
-    branches: [main]
+
+  # to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 jobs:
-  check-large-files:
-    name: Check Large Files
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Check large files
-        uses: ActionsDesk/lfs-warning@v2.0
-        with:
-          filesizelimit: 10485760 # 10MB limit
-
   sync-to-hub:
-    name: Sync to Hugging Face Hub
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -29,4 +17,4 @@ jobs:
       - name: Push to hub
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
-        run: git push https://tejacherukuri:$HF_TOKEN@huggingface.co/spaces/tejacherukuri/ProSpectAI main
+        run: git push https://HF_USERNAME:$HF_TOKEN@huggingface.co/spaces/HF_USERNAME/SPACE_NAME main
