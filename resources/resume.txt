@@ -1,0 +1,95 @@
+Name: Teja Krishna Cherukuri
+Phone: 470-662-7146
+Address: Atlanta, GA (Open to Relocation)
+Email: tejakrishnacherukuri@gmail.com
+Linkedin Url: https://linkedin.com/in/tejacherukuri
+Github Url: https://github.com/tejacherukuri
+Portfolio Url: https://tejacherukuri.github.io
+Google Scholar Url: https://scholar.google.com/citations?user=6S9WmqwAAAAJ&hl=en
+
+Education
+College: Georgia State University
+Location: Atlanta, GA
+Degree: Master of Science in Computer Science, GPA: 4.21/4.3
+Duration: Aug 2023 – May 2025
+Coursework: Deep Learning, Advanced Machine Learning, Computer Vision, Natural Language Processing, Digital
+Image Processing, Computational Intelligence, Data Science
+
+Technical Skills
+Languages: Python, Java, SQL
+Frameworks: PyTorch, TensorFlow, Keras, Flask, FastAPI, LangChain, Streamlit
+Libraries: NumPy, Pandas, Scikit-Learn, Matplotlib, OpenCV, NLTK
+Cloud & DevOps Tools: Git, Docker, Azure ML Studio, Azure AI Services
+
+Work Experience
+Role: Graduate Research Assistant
+Company: Georgia State University (TReNDS Lab)
+Duration: Sep 2023 – Present
+Location: Atlanta, GA
+
+Responsibilities or duties:
+• Published 5 IEEE papers showcasing the impact of our research methods for advancing AI in Medicine.
+• Developed and fine-tuned Multi-modal LLMs for medical image captioning using PyTorch, integrating images
+with diagnostic text, achieving a 13.4% higher BLEU4 over VisionGPT, with just 440M parameters, and
+reducing inference time to 1.6 sec per image.
+• Designed various medical image classification models for diagnosing chronic diseases such as schizophrenia, diabetic
+retinopathy, breast cancer, and colon cancer using specific imaging modalities with 5%–7% lower false negatives.
+• Enabled high-performance computing for training deep learning models through Slurm job scheduling,
+optimizing resource allocation and accelerating processing times.
+
+---Below are more details about the work I did, in the GRA role, can be used more in the context of research positions if needed---
+More details starts here
+Note: The below is just a background info of my works, you can only use this when there is absolute need of drafting to detail and stuff. 
+• Medical Vision Language Transformer: Pioneered a novel approach for resource-constrained environments, integrating Abstractor & Adaptor to enhance feature focus and fusion, achieving expert-level precision in medical image captioning.
+• Multi-Modal Medical Transformer: Devised a vision-language model integrating retinal image features & clinical keywords, achieving a 13.5% improvement in BLEU-4 over GPT-2 for accurate diagnostic report generation and improving explainability by visualizing attention to diseased regions.
+• Guided Context Gating: Innovated a novel attention model to improve context learning in retinal images, boosting accuracy by 2.63% over advanced attention methods & 6.53% over Vision Transformer, enhancing retinopathy diagnosis.
+• Spatial Sequence Attention Network: Formulated a unique attention mechanism to identify Schizophrenia specific regions in brain sMRI, improving diagnosis accuracy by 6.52% and clinical interpretability with neuroanatomical insights.
+• Multi-Modal Imaging Genomics Transformer: Designed a fusion model combining genomics with sMRI & fMRI, bettering Schizophrenia diagnosis accuracy by 2.12% and revealing associated genetic markers.
+More details ends here
+
+Role: Data Scientist
+Company: Tata Consultancy Services Limited
+Duration: Nov 2020 – Aug 2023
+Location: Hyderabad, TS
+
+Responsibilities or duties:
+• Built a customer attrition system based on ensemble of SVM, Random Forest, and AdaBoost in Python using
+scikit-learn, improving 42 basis points in annual customer retention.
+• Led a POC for a dynamic risk-based pricing model, aligning interest rates with borrower risk profiles and market
+conditions, which reduced underpriced loans by 18%, and generated $3M in annual revenue growth.
+• Implemented REST APIs using FastAPI to surface machine learning models for loan approval and fraud
+detection, reducing workflows processing time by 30% and preventing potential fraud losses of $25M, annually.
+• Developed and deployed a chatbot using Azure AI Bot Service for handling customer queries in collaboration
+with the Customer Experience & Personalization team, achieving a 96% CSI and a 3.5 FTE reduction.
+• Achieved sub-100ms response times for high-volume inference requests by containerizing models with Docker and
+deploying them on GPU-enabled Azure Container Instances.
+
+Research Experience and Accomplishments
+• Published 7 research papers in journals, with 280+ citations and 5 H-index, pioneering Attention models,
+Multi-modal learning, Transformers and Large Vision Language Models.
+• Presented 5 works at reputed conferences, including ISBI 2024, ICIP 2024, ISBI 2025, and ICASSP 2025.
+
+Projects
+Name: RetinAI Doctor
+Link: https://github.com/TejaCherukuri/Guided-Context-Gating
+Demo: https://huggingface.co/spaces/tejacherukuri/Guided-Context-Gating
+Technologies used: Python, Streamlit, TensorFlow, OpenCV, Git
+Duration: Feb 2024 - Jun 2024
+• Built an AI tool to process retinal scans, predict diabetic retinopathy (DR) severity, and achieved 90.13% accuracy
+and recall using a novel Guided Context Gating (GCG) attention mechanism.
+• Enhanced interpretability by generating attention maps that highlight areas of focus, empowering ophthalmologists
+with insights for early and reliable DR diagnosis.
+
+
+Additional details about my resume: 
+Job Interests: Data Scientist, Applied Scientist, Research Scientist, AI Engineer, Machine Learning Engineer, Deep Learning Engineer, Research Engineer
+Open to any location to work within the U.S (Comfortable with all modes of working - hybrid, onsite and remote)
+I can only apply to jobs with (university grad roles, early career postings, associate level postings, 3 years of experienced roles)
+I have end-to-end machine learning project experience, from requirement gathering, model development, model optimisation, model evaluation and model deployment. 
+Additional Skills: 
+Machine Learning, Linear Regression, Logistic Regression, Classification, PCA, Ensembling.
+Deep Learning: Neural Networks, Convolutional Neural Networks, Recurrent Neural Networks, LSTMs, Transformers, LLMs, MLLMs, Vision Language Models, Generative AI, VAE.
+Certification: Deep Learning Specialisation from DeepLearning.AI, Python for Everybody certification from University of Michigan
+
+
+
