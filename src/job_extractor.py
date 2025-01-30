@@ -4,6 +4,9 @@ from langchain_core.prompts import PromptTemplate
 from langchain_core.output_parsers import JsonOutputParser
 from langchain_core.exceptions import OutputParserException
 from src.utils import clean_text
+import json
+import requests
+
 
 class JobExtractor:
     """
@@ -46,6 +49,8 @@ class JobExtractor:
             `role`, `experience`, `skills`, `responsibilities`, `basic qualifications`, 
             `preferred qualifications`, and `description`.
             Only return the valid JSON.
+            If you do not find any data to form a JSON, return 
+            ```json{{'job_postings': []}}```
             ### VALID JSON (NO PREAMBLE):
             """
         )
@@ -71,15 +76,30 @@ class JobExtractor:
         ValueError: If the content could not be loaded or cleaned properly.
         """
         try:
-            loader = WebBaseLoader(url)
+            headers = {
+                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+            }
+            loader = WebBaseLoader(url, headers)
             page_data = loader.load().pop().page_content
+
+            # Check for blocking or unsupported browser messages
+            if "unsupported browser" in page_data.lower():
+                raise ValueError(f"Unsupported browser message detected.")
+                # return None
+
             if not page_data:
-                raise ValueError("The scraped page content is empty.")
+                raise ValueError(f"Failed to fetch content from the URL {url}.")
+        
+            print(f"===Page Data===\n {page_data}")
+
             cleaned_data = clean_text(page_data)
-            print(f"Scraped and cleaned data: {cleaned_data[:200]}...")  # Displaying a snippet of data for debugging
+            print(f"=== Scraped and cleaned data ===\n {cleaned_data}...")  # Displaying a snippet of data for debugging
             return cleaned_data
         except Exception as e:
-            raise ValueError(f"Error scraping or cleaning the content from the URL {url}: {e}")
+            print(f"WebBaseLoader Error: {e}")
+            # raise ValueError(f"Failed to fetch content from the URL {url}.")
+            return None
+        
 
     def extract_jobdata(self, text):
         """
@@ -104,14 +124,29 @@ class JobExtractor:
             extract_chain = self.extract_prompt | self.chat_model.groq
             res = extract_chain.invoke(input={"page_data": text})
 
-            # Try parsing the response content into JSON format
-            job_data = self.json_parser.parse(res.content)
-            print("=====================JSON Job Data==================")
-            print(job_data)
-            return job_data
-        
+            print(f"=== Result Content ===\n {res.content}")
+
+            if not res.content.strip():  # Check if response is empty
+                raise ValueError("No valid job data extracted.")
+
+            try:
+                job_data = self.json_parser.parse(res.content)
+                print(f"=== JSON Job Data ===\n {job_data}")
+                return job_data
+            except json.decoder.JSONDecodeError:
+                print("Invalid JSON received. Returning empty job data.")
+                return {"job_postings": []}  # Fail gracefully
+            
+        except requests.exceptions.HTTPError as http_err:
+            if http_err.response.status_code == 413:
+                raise ValueError("The input is too large. Please reduce the size and try again.")
+            elif http_err.response.status_code == 429:
+                raise ValueError("Too many requests. Please try again later.")
+            else:
+                raise ValueError(f"HTTP error occurred: {http_err}") from http_err
         except OutputParserException as e:
-            raise OutputParserException("Unable to parse job data as valid JSON. The response might be malformed or incomplete.") from e
+            raise OutputParserException("Unable to parse job data as valid JSON.") from e
         except Exception as e:
             raise ValueError(f"An error occurred during job extraction: {e}") from e
+
 

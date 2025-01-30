@@ -67,7 +67,7 @@ class TextResumeLoader(ResumeLoader):
         
         text_loader = TextLoader(self.file_path)
         resume = text_loader.load()  # Directly load the full text without chunking
-        print(resume[0].page_content)
+        print(f"=== Resume Content ===\n {resume[0].page_content}")
 
         return resume[0]
 
@@ -118,7 +118,7 @@ class PdfResumeLoader(ResumeLoader):
             pdf_loader = PyPDFLoader(temp_file_path)
             resume = pdf_loader.load()  # Extract text from PDF
             
-            print(resume[0].page_content)  # Debug: Print first page content
+            print(f"=== Resume Content ===\n {resume[0].page_content}")
             return resume[0]
 
         except Exception as e:

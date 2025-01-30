@@ -1,6 +1,7 @@
 from src.chat_model import ChatModel
 from langchain_core.prompts import PromptTemplate
 import re
+import requests
 
 class MessageWriter:
     """
@@ -106,18 +107,22 @@ class MessageWriter:
                 extracted_text = extracted_text.strip()  # Strip leading/trailing whitespace and newlines
 
                 # Print the well-formatted text
-                print("======Thought Process======")
-                print(extracted_text)
+                print(f"=== Thought Process ===\n {extracted_text}")
                 think_content = extracted_text
             else:
                 print("No content found between <think> and </think> tags.")
 
-            print("======Cleaned Response======")
-            print(cleaned_response)
+            print(f"=== Cleaned Response ===\n {cleaned_response}")
 
             # Return the extracted thought process and the cleaned email content
             return think_content, cleaned_response.strip()
-
+        except requests.exceptions.HTTPError as http_err:
+            if http_err.response.status_code == 413:
+                raise ValueError("The input is too large. Please reduce the size and try again.")
+            elif http_err.response.status_code == 429:
+                raise ValueError("Too many requests. Please try again later.")
+            else:
+                raise ValueError(f"HTTP error occurred: {http_err}") from http_err
         except Exception as e:
             # Raise a ValueError with additional context if there was an error in processing
             raise ValueError(f"An error occurred while generating the email: {e}") from e
