@@ -7,43 +7,54 @@ def main():
     # Set the page layout to wide mode
     st.set_page_config(page_title="ProSpectAI: The Smart Way to Reach Out to Recruiters", layout="wide")
 
-    # Title of the app
-    st.title("ProSpectAI: The Smart Way to Reach Out to Recruiters")
-    st.markdown("Tailored job application messages at the click of a button.")
-
-    # Add GitHub repository link
-    st.markdown("[🔗 View on GitHub](https://github.com/tejacherukuri/ProSpectAI)")
-
-    # Resume Upload Section
-    st.subheader("Upload Your Resume")
-    uploaded_file = st.file_uploader("Upload a PDF Resume", type=["pdf"])
-
-    # Job Input Option (Radio Buttons for Job URL or Description)
-    input_option = st.radio(
-        "How would you like to provide the job information?",
-        ("Job URL", "Job Description")
+    # Custom CSS to reduce the subheader size
+    st.markdown(
+        """
+        <style>
+            /* Reduce font size for subheaders */
+            div[data-testid="stMarkdownContainer"] h3 {
+                font-size: 25px !important; /* Adjust size as needed */
+                font-weight: bold !important;
+            }
+        </style>
+        """,
+        unsafe_allow_html=True
     )
 
-    job_url = None
-    job_description = None
+    # Title of the app
+    st.title("ProSpectAI: The Smart Way to Reach Out to Recruiters")
+    st.markdown("Tailored job application messages at the click of a button. [[GitHub]](https://github.com/tejacherukuri/ProSpectAI)")
 
-    # Show corresponding input field based on the selection
-    if input_option == "Job URL":
+    # Resume Upload Section
+    st.subheader("Upload Your Resume & Job Information")
+    uploaded_file = st.file_uploader("Upload a PDF Resume", type=["pdf"])
+
+    # Job Input Option (Radio Buttons Side by Side)
+    col1, col2 = st.columns([1, 1])  # Equal width columns
+
+    with col1:
+        job_input_option = st.radio("How would you like to provide the job information?", ["Job URL", "Job Description"], horizontal=True)
+    
+    job_description = None
+    job_url = None
+        
+    # Dynamic Input Fields Based on Selection
+    if job_input_option == "Job URL":
         job_url = st.text_input(
             "Enter the Job URL",
             placeholder="https://amazon.jobs/en/jobs/2831138/software-development-engineer-2025-ai-ml"
         )
         
-        # Display the alert with color
-        with st.expander("🔔 **Alert!** Job URL Instructions", expanded=True):
-            st.markdown(
-                """
-                <p style="color:red;">If using a LinkedIn job URL (Easy Apply), paste the job description instead.</p>
-                """, unsafe_allow_html=True)
+        # Expander for LinkedIn job URL Note
+        with st.expander("ℹ️ Important Note", expanded=True):
+            st.markdown('<span style="color: red;">If using a LinkedIn job URL (Easy Apply), paste the job description instead.</span>', unsafe_allow_html=True)
 
-    elif input_option == "Job Description":
-        job_description = st.text_area("Enter the Job Description", height=200)
-
+    elif job_input_option == "Job Description":
+        job_description = st.text_area(
+            "Paste the Job Description",
+            placeholder="Copy and paste the job description here..."
+        )
+        
 
     # Button to trigger the flow
     if st.button("Generate Message"):
